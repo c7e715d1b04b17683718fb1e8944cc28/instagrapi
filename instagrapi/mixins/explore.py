@@ -1,3 +1,7 @@
+from instagrapi.utils import dumps, generate_signature
+import random
+
+
 class ExploreMixin:
     """
     Helpers for the explore page
@@ -43,3 +47,40 @@ class ExploreMixin:
         return self.private_request(
             "/v1/discover/media_metadata/", params={"media_id": media_pk}
         )["media_or_ad"]
+
+    def explore_chaining_experience_contextual_ads(
+        self,
+        seed_ad_id: int,
+        inventory_source: str,
+        multi_ad_individual_chain_ad_tracking_token: str,
+        multi_ad_individual_chain_ad_ad_id: int,
+        seed_ad_token: str,
+        trigger_type: str,
+        position: int,
+        log_exposure_on_server: bool,
+        container_module: str = "feed_timeline",
+    ):
+        data = {
+            "seed_ad_id": seed_ad_id,
+            "inventory_source": inventory_source,
+            "phone_id": self.phone_id,
+            "battery_level": random.randint(25, 100),
+            "multi_ad_individual_chain_ad_tracking_token": multi_ad_individual_chain_ad_tracking_token,
+            "_uid": self.user_id,
+            "multi_ad_individual_chain_ad_ad_id": multi_ad_individual_chain_ad_ad_id,
+            "_uuid": self.uuid,
+            "seed_ad_token": seed_ad_token,
+            "trigger_type": trigger_type,
+            "is_charging": random.randint(0, 1),
+            "position": position,
+            "is_dark_mode": random.randint(0, 1),
+            "will_sound_on": random.randint(0, 1),
+            "log_exposure_on_server": log_exposure_on_server,
+            "container_module": container_module,
+        }
+
+        return self.private_request(
+            "/v1/discover/chaining_experience_contextual_ads/",
+            data=data,
+            with_signature=True,
+        )
