@@ -1,4 +1,3 @@
-from instagrapi.utils import dumps, generate_signature
 import random
 
 
