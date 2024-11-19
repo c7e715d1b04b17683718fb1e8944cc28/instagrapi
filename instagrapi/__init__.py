@@ -41,6 +41,7 @@ from instagrapi.mixins.totp import TOTPMixin
 from instagrapi.mixins.track import TrackMixin
 from instagrapi.mixins.user import UserMixin
 from instagrapi.mixins.video import DownloadVideoMixin, UploadVideoMixin
+from instagrapi.mixins.reports import ReportsMixin
 
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
@@ -89,6 +90,7 @@ class Client(
     MultipleAccountsMixin,
     NoteMixin,
     FundraiserMixin,
+    ReportsMixin,
 ):
     proxy = None
 
